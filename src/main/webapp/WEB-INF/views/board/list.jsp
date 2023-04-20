@@ -103,31 +103,42 @@ a {
 
 
  
-    <div class="row ">
-	<nav aria-label="Page navigation example">
-		<ul class="pagination mt-3" style="justify-content: center;">
-			<li class="page-item ${pager.after eq false ? 'disabled' : ''} ">
-			<a class="page-link text-dark page-qna" href="#" aria-label="Previous" data-board-page="1"> 
-			<span aria-hidden="true">&laquo;</span>
-			</a></li>
-			<li class="page-item ${pager.before?'disabled':''}">
-			<a class="page-link text-dark page-qna" href="./list?page=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}" aria-label="Previous" data-board-page="${pager.startNum-1}"> <span aria-hidden="true">&lsaquo;</span>
-			</a></li>
- 
-			<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="page">
-				<li class="page-item"><a class="page-link text-dark page-qna" href="./list?page=${page}&kind=${pager.kind}&search=${pager.search}">${page}</a>
-					</li>
-			</c:forEach>
+    <div class="row my-3">
+	<nav aria-label="Page navigation example ">
+		<ul class="pagination" style="justify-content: center">
+							<li class="page-item ${pager.page eq 1 ?'disabled':''}"><a
+								class="page-link"
+								href="./list?page=1&kind=${pager.kind}&search=${pager.search}"
+								aria-label="Previous" data-board-page="1"> <span
+									aria-hidden="true">&laquo;</span>
+							</a></li>
+							<li class="page-item ${pager.page eq 1 ?'disabled':''}">
+								<a class="page-link" href="./list?page=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}" aria-label="Previous" data-board-page="${pager.startNum}"> 
+									<span aria-hidden="true">&lsaquo;</span>
+							</a></li>
 
-			 <li class="page-item ${pager.after eq false ? 'disabled' : ''}">
-				<a class="page-link text-dark page-qna" href="./list?page=${pager.lastNum-1}&kind=${pager.kind}&search=${pager.search}" aria-label="Next" data-board-page="${pager.lastNum+1}"> <span aria-hidden="true">&rsaquo;</span>
-			</a>
-			</li>
-			<li class="page-item ${pager.after eq false ? 'disabled' : ''} ">
-				<a class="page-link text-dark page-qna" href="#" aria-label="Next" data-board-page="${pager.totalPage}"> <span aria-hidden="true">&raquo;</span>
-			</a>
-			</li>
-		</ul>
+							<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="page">
+								<li class="page-item"><a class="page-link" href="./list?page=${page}&kind=${pager.kind}&search=${pager.search}">${page}</a></li>
+							</c:forEach>
+
+
+							<li class="page-item ${pager.next eq false ?'disabled':''}">
+								<a class="page-link"
+								href="./list?page=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}"
+								aria-label="Next" data-board-page="${pager.lastNum}"> <span
+									aria-hidden="true">&rsaquo;</span>
+							</a>
+							</li>
+
+							<li
+								class="page-item ${pager.page eq pager.totalPage?'disabled' : ''}">
+								<a class="page-link"
+								href="./list?page=${pager.totalPage}&kind=${pager.kind}&search=${pager.search}"
+								aria-label="Next" data-board-page="${pager.totalPage}"> <span
+									aria-hidden="true">&raquo;</span>
+							</a>
+							</li>
+						</ul>
 	</nav>
 </div> 
 

@@ -25,8 +25,8 @@
                     <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
                         <div class="text-center mb-5">
                             <div class="feature  bg-gradient text-white rounded-3 mb-3"><img src="../images/pencil.png"></div>
-                            <h1 class="fw-bolder">공지사항 글쓰기</h1>
-                            <p class="lead fw-normal text-muted mb-0">공지사항을 써주세요</p>
+                            <h1 class="fw-bolder" style="text-transform:uppercase;" >${board} 글쓰기</h1>
+                            <p class="lead fw-normal text-muted mb-0">글을 써주세요</p>
                         </div>
                         <div class="row gx-5 justify-content-center">
                             <div class="col-lg-8 col-xl-6">
@@ -48,15 +48,15 @@
                                    
                                  
                                      <!-- Contents input-->
-                                    <div class="form-floating mb-3">
+                                     <div class="form-floating mb-3">
                                         <textarea class="form-control" id="contents" type="text" name="contents" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
                                         <label for="contents">내용</label>
                                         <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
                                     </div>
                                     
                                     
-                                    
-                                    <!-- <div class="form-floating">
+                                  <!--   
+                                   <div class="form-floating">
 										<textarea class="form-control" placeholder="Leave a comment here" id="contents"></textarea>
 										<label for="contents">Comments</label>
 									</div>
@@ -79,71 +79,7 @@
                         </div>
                     </div>
                     
-                    <script>
-		$('#contents').summernote({
-			
-				  callbacks: {
-				    onImageUpload: function(file) {
-				      // upload image to server and create imgNode...
-				  	/* uploadFile(files) */
-						const formData = new FormData();
-						//<input type="file"
-						formData.append('boardFiles', file[0])
-						$.ajax({
-							type:"POST",
-							url:"add",
-							data:formData,
-							//header
-							cache:false,
-							processData:false,
-							contentType:false,
-							enctype:'multipart/form-data',
-							success:function(img){
-								console.log("Image => ", img)
-								// img = '<img src="'+img+'">'
-								// $("#contents").summernote('pasteHTML', img);
-								$("#contents").summernote('insertImage', img);
-								 
-							},
-							error:function(){
-								console.log('Image upload Fail')
-							}
-						});
-				    }
-				  }
-		});//
-		
-		  function uploadFile(file){
-				console.log("file", file);
-				console.log("fileName => ", file[0].name);
-				//<form>
-				const formData = new FormData();
-				//<input type="file"
-				formData.append('boardFiles', file[0])
-				$.ajax({
-					type:"POST",
-					url:"add",
-					data:formData,
-					//header
-					cache:false,
-					processData:false,
-					contentType:false,
-					enctype:'multipart/form-data',
-					success:function(img){
-						console.log("Image => ", img)
-						// img = '<img src="'+img+'">'
-						// $("#contents").summernote('pasteHTML', img);
-						$("#contents").summernote('insertNode', img);
-						 
-					},
-					error:function(){
-						console.log('Image upload Fail')
-					}
-				});
-			  }
-		
-		
-	</script>
+         
                     <!-- Contact cards-->
                     <div class="row gx-5 row-cols-2 row-cols-lg-4 py-5">
                         <div class="col ">

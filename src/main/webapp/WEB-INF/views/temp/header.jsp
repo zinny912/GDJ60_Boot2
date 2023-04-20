@@ -12,9 +12,8 @@
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                             <li class="nav-item"><a class="nav-link" href="/notice/list">노티스</a></li>
-                            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                            <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
-                            <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/qna/list">QNA</a></li>
+                           
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Blog</a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
@@ -29,6 +28,17 @@
                                     <li><a class="dropdown-item" href="portfolio-item.html">Portfolio Item</a></li>
                                 </ul>
                             </li>
+                             <c:choose>
+                              <c:when test="${member eq null}">
+                             <li class="nav-item"><a class="nav-link" href="/member/login">로그인</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/member/join">회원가입</a></li>
+                           	</c:when>
+                            <c:otherwise>
+                           <li class="nav-item"><a class="nav-link" href="/member/logout">로그아웃</a></li>
+                           	<li class="nav-item"><a class="nav-link" href="/member/myPage">마이페이지</a></li>
+                           </c:otherwise>
+                            </c:choose>
+                            
                         </ul>
                     </div>
                 </div>
