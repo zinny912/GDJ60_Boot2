@@ -11,83 +11,74 @@
        <c:import url="../temp/style.jsp"></c:import>
        <!-- css & favicon  -->
     </head>
+    
 <body>
-
-<section class="vh-70" style="background-color: #eee;">
-  <div class="container-fluid">
-    <div class="row d-flex justify-content-center align-items-center h-80">
-      <div class="col-lg-12 col-xl-11">
-            <div class="row justify-content-center">
-              <div class="col-md-8 col-lg-5 col-xl-4 order-1 order-lg-1">
-        <div class="card text-black" style="border-radius: 20px;">
-          <div class="card-body">
-          
-                <p class="text-center h3 fw-bold mb-2 mx-1 mx-md-4 mt-2">회원가입</p>
-
-                <form id="login_form" class="login_form mx-1 mx-md-4" action="./join" method="post">
-
-                  <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                      <input type="text" id="userName" name="userName" class="form-control" placeholder="아이디"/>
-                           <label class="form-label" id="idLabel" for="id"></label>
-					<div  class="hstack gap-3" id="emailDiv">
-                      <input  type="email" id="email" name="email" class="col essential form-control" placeholder="이메일"/>
-<!--                       <button type="button" class="col-2 btn btn-secondary text-nowrap">인증</button> -->
-					</div>
-                    
-
-          <input type="password" id="password" name="password" class=" form-control" placeholder="비밀번호"/>
-                      <label class="form-label" for="Password" id="password"></label>
-                      <!-- <input type="password" id="passwordCheck" class="essential form-control" placeholder="비밀번호 확인"/>
-                      <label class="form-label" id="passwordCheckLabel" for="passwordCheck"></label>
-                    </div> -->
-                  </div>
-                  
-                  <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                      <input type="text" id="name" name="name" class="essential form-control" placeholder="이름"/>
-<!--                       <label class="form-label" for="name">Your Name</label> -->
+<main class="flex-shrink-0">
+     <c:import url="../temp/header.jsp"></c:import>
+     
+<section class="py-5">
+                <div class="container px-5">
+                    <!-- Contact form-->
+                    <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
+                        <div class="text-center mb-5">
+                            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-envelope"></i></div>
+                            <h1 class="fw-bolder">회원가입</h1>
+                            <p class="lead fw-normal text-muted mb-0">인적사항을 입력하세요</p>
+                        </div>
+                        <div class="row gx-5 justify-content-center">
+                            <div class="col-lg-8 col-xl-6">
+                                
+                                <form id="contactForm" data-sb-form-api-token="API_TOKEN" action="./join" method="post">
+                                    <!-- Name input-->
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control" id="userName" name="userName" type="text" placeholder="아이디" data-sb-validations="required" />
+                                        <label for="userName">아이디</label>
+                                        <div class="idRe" style="color:red" data-sb-feedback="name:required"></div>
+                                    </div>
+                                     <!-- password input-->
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control" id="password" name="password" type="tel" placeholder="비밀번호" data-sb-validations="required" />
+                                        <label for="password">비밀번호</label>
+                                        <div class="pwRe" data-sb-feedback="phone:required"></div>
+                                    </div>
+                                    <!-- Phone number input-->
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control" id="passwordCheck" name="passwordCheck" type="text" placeholder="비밀번호확인" data-sb-validations="required" />
+                                        <label for="passwordCheck">비밀번호확인 </label>
+                                        <div class="pwReCheck" data-sb-feedback="phone:required"></div>
+                                    </div>
+                                    <!-- Phone number input-->
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control" id="name" name="name" type="text" placeholder="이름" data-sb-validations="required" />
+                                        <label for="name">이름</label>
+                                        <div class="invalid-feedback" data-sb-feedback="name:required">A phone number is required.</div>
+                                    </div>
+                                    <!-- Email address input-->
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control" id="email" name="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
+                                        <label for="email">이메일</label>
+                                        <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
+                                        <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                                    </div>
+                                    <!-- Birth input-->
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control" id="birth" type="date" name="birth" data-sb-validations="required" />
+                                        <label for="birth">생년월일</label>
+                                        <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                                    </div>
+                                   
+                                    <!-- Submit Button-->
+                                    <div class="d-grid"><button class="btn btn-primary btn-lg " id="submitButton" type="submit">Submit</button></div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                   </div>
-
-
-
-                  <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                      <input type="text" id="birth" name="birth" class="form-control" placeholder="생년월일"/>
-<!--                       <label class="form-label" for="phone">연락처</label> -->
-                    </div>
-                  </div>
-
-                 <!--  <div class="form-check d-flex justify-content-center mb-5">
-                   <p>모든 약관에 동의합니다.</p>
-                    <label class="form-check-label" for="agree">
-                    <br>
-                   <input class="check1 form-check-input me-2 text-center" onClick="javascript:mAgree();" type="checkbox" value="" id="agree" />
-                     <a id="terms" href="javascript:mAgree()">약관확인</a>
-                    </label>
-    				
-                  </div> -->
-
-                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <button type="submit" id="submitbtn" class="btn btn-primary btn-lg">회원가입</button>
-                  </div>
-
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+             </section>
+</main>
 <!-- footer 적용해야함 --> 
 <c:import url ="../temp/footer.jsp"></c:import>
 <!-- footer 적용 끝 -->
-
+<script src="/js/joinFormCheck.js"></script>
 </body>
 </html>

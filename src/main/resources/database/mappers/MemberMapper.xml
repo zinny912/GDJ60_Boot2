@@ -25,14 +25,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<insert id="setJoin" parameterType="memberVO">
 		INSERT INTO MEMBER (USERNAME, PASSWORD, NAME, EMAIL, BIRTH, ENABLED)
-		VALUES (#{userName}, #{password}, #{name}, #{email}, #{birth}, 1)
+		VALUES (#{userName}, #{password}, #{name}, #{email}, #{birth}, #{enabled})
 	</insert>
 
-	<insert id = "setMemberRole" parameterType="RoleVO">
-		SELECT * FROM MEMBER_ROLE 
-		VALUES (#{userName},3)	
+	<insert id = "setMemberRole" parameterType="Map">
+		INSERT INTO MEMBER_ROLE (USERNAME, NUM)
+		VALUES (#{userName},#{num})	
 	</insert>
 
+	<select id="idDuplicateCheck" resultType="MemberVO" parameterType="MemberVO">
+		SELECT USERNAME FROM MEMBER WHERE USERNAME=#{userName} 
+	</select>
+	
+	
 	
 	
 </mapper>

@@ -13,7 +13,10 @@
                             <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                             <li class="nav-item"><a class="nav-link" href="/notice/list">노티스</a></li>
                             <li class="nav-item"><a class="nav-link" href="/qna/list">QNA</a></li>
-                           
+                          <c:if test="${member.getRoleVOs().get(0).getNum() eq 1}">
+	                            	 <li class="nav-item"><a class="nav-link" href="/member/admin">관리자</a></li>
+	                            </c:if>  
+                          
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Blog</a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">

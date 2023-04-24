@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class RoleVO {
 	
-	private Integer num;
+	private Long num;
 	private String roleName;
 
 }
