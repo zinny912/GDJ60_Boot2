@@ -2,8 +2,11 @@ package com.iu.base.board.qna;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -64,20 +67,25 @@ public class QnaController {
 		return mv;
 	}
 	@GetMapping("add")
-	public ModelAndView setInsert() throws Exception{
+	public ModelAndView setInsert(@ModelAttribute BoardVO boardVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("board/add");
 		return mv;
 	}
 
 	@PostMapping("add")
-	public ModelAndView setInsert(QnaVO qnaVO, MultipartFile[] boardFiles) throws Exception{
+	public ModelAndView setInsert(@Valid BoardVO boardVO, BindingResult bindingResult, MultipartFile[] boardFiles) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		if(bindingResult.hasErrors()) {
+			mv.setViewName("board/add");
+			return mv;
+		}
+		
 		for(MultipartFile multipartFile:boardFiles) {
 			log.info("OriginalName : {} size:{}",multipartFile.getOriginalFilename(), multipartFile.getSize());
 		}
 		
-		int result = qnaService.setInsert(qnaVO, boardFiles);
-		ModelAndView mv = new ModelAndView();
+		int result = qnaService.setInsert(boardVO, boardFiles);
 		mv.setViewName("redirect:./list");
 		
 		return mv;

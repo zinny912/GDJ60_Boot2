@@ -6,12 +6,40 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
 
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @Service
 public class MemberService {
 	
 	@Autowired
 	private MemberDAO memberDAO;
+	
+	//패스워드 일치여부판단하는 검증 메서드 만들기
+	//check=true: 에러있음! 검증실패 / check=false: 에러없음! 통과
+	public boolean memberCheck(MemberVO memberVO, BindingResult bindingResult)throws Exception{
+		boolean check=false;
+		
+		//1.annotation 검증결과 
+		check = bindingResult.hasErrors();
+		
+		//2.password가 일치하는지 검증하기 
+		if(!memberVO.getPassword().equals(memberVO.getPasswordCheck())) {
+			check=true;
+			bindingResult.rejectValue("passwordCheck", "member.password.notEqual");
+		
+		}
+		
+		//3. ID중복 검사
+		MemberVO result=memberDAO.idDuplicateCheck(memberVO);
+		if(result !=null) {
+			check=true;
+			bindingResult.rejectValue("userName", "member.id.duplicate");
+		}
+		 
+		return check;
+	}
 	
 	public int setJoin(MemberVO memberVO) throws Exception {
 		

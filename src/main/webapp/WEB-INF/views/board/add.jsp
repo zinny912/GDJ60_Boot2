@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -31,19 +32,27 @@
                         <div class="row gx-5 justify-content-center">
                             <div class="col-lg-8 col-xl-6">
                              
-                                <form id="contactForm" action="./add" method="post" enctype="multipart/form-data">
+                               <%--  <form id="contactForm" action="./add" method="post" enctype="multipart/form-data"> --%>
+                                <form:form id="contactForm" cssClass= "" modelAttribute="boardVO" method="post" enctype="multipart/form-data"> 
+                                   
                                     <!-- Title input-->
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="title" type="text" name="title" placeholder="제목을 입력하세요" data-sb-validations="required" />
+                                        <!-- <input class="form-control" id="title" type="text" name="title" placeholder="제목을 입력하세요" data-sb-validations="required" /> -->
+                                        
+                                        <form:input path="title" id="title" cssClass="form-control" />
+                                        <!-- modelAttribute로 받은 setter를 path에 쓰기  -->
+                                        
                                         <label for="title">제목</label>
-                                        <div class="invalid-feedback" data-sb-feedback="title:required">A name is required.</div>
+                                        <form:errors path="title" cssStyle="color:tomato"></form:errors>
+                                        
                                     </div>
                                     <!-- Writer input-->
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="writer" type="text" name="writer" data-sb-validations="required" />
+                                       <!--  <input class="form-control" id="writer" type="text" name="writer" data-sb-validations="required" /> -->
+                                        <form:input path="writer" id="writer" cssClass="form-control"/>
                                         <label for="writer">작성자</label>
-                                        <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                                        <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                                        <form:errors path="writer" cssStyle="color:tomato"></form:errors>
+                                        
                                     </div>
                                    
                                  
@@ -73,8 +82,8 @@
                                     </div>
 									                                    
                                     <!-- Submit Button-->
-                                    <div class="d-grid"><button class="btn btn-primary btn-lg" id="submitButton" type="sumbit">Submit</button></div>
-                                </form>
+                                    <div class="d-grid"><button class="btn btn-primary btn-lg" id="submitButton" type="submit">Submit</button></div>
+                                </form:form>
                             </div>
                         </div>
                     </div>
@@ -108,7 +117,7 @@
  
  
  
- <script src="../js/boardForm.js"></script>
+ <!-- <script src="../js/boardForm.js"></script> -->
  <script src="../js/fileManager.js"></script>
 <!-- footer 적용해야함 --> 
 <c:import url ="../temp/footer.jsp"></c:import>

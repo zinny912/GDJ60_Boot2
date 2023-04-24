@@ -41,7 +41,8 @@
                            	<li class="nav-item"><a class="nav-link" href="/member/myPage">마이페이지</a></li>
                            </c:otherwise>
                             </c:choose>
-                            
+                            <li class="nav-item"><a class="nav-link" href="/?lang_opt=ko">KO</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/?lang_opt=en">EN</a></li>
                         </ul>
                     </div>
                 </div>

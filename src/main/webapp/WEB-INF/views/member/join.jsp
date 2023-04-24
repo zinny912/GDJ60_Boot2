@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+ <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
 <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -28,48 +29,56 @@
                         <div class="row gx-5 justify-content-center">
                             <div class="col-lg-8 col-xl-6">
                                 
-                                <form id="contactForm" data-sb-form-api-token="API_TOKEN" action="./join" method="post">
+                                <%-- <form id="contactForm" data-sb-form-api-token="API_TOKEN" action="./join" method="post"> --%>
+                                <form:form id="contactForm" modelAttribute="memberVO" method="post">
                                     <!-- Name input-->
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="userName" name="userName" type="text" placeholder="아이디" data-sb-validations="required" />
-                                        <label for="userName">아이디</label>
-                                        <div class="idRe" style="color:red" data-sb-feedback="name:required"></div>
+                                        <form:input path="userName" id="userName" cssClass="form-control"/>
+                     
+                                        <form:label path="userName">아이디</form:label>
+                                        <form:errors path="userName" cssStyle="color:tomato"/>
+                                       	<div class="idReCheck"></div>
                                     </div>
                                      <!-- password input-->
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="password" name="password" type="tel" placeholder="비밀번호" data-sb-validations="required" />
-                                        <label for="password">비밀번호</label>
-                                        <div class="pwRe" data-sb-feedback="phone:required"></div>
+                                    <form:input path="password" id="password" cssClass="form-control" type="password"/>
+                                       
+                                        <form:label path="password">비밀번호</form:label>
+                                    <form:errors path="password" cssStyle="color:tomato"/>    
+                                         
                                     </div>
                                     <!-- Phone number input-->
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="passwordCheck" name="passwordCheck" type="text" placeholder="비밀번호확인" data-sb-validations="required" />
-                                        <label for="passwordCheck">비밀번호확인 </label>
-                                        <div class="pwReCheck" data-sb-feedback="phone:required"></div>
+                                        <form:input cssClass="form-control" id="passwordCheck" path="passwordCheck" type="password" placeholder="비밀번호확인" />
+                                        <form:label path="passwordCheck">비밀번호확인 </form:label>
+                                        <form:errors path="passwordCheck"></form:errors>
+                                        <div class="pwReCheck"></div>
                                     </div>
                                     <!-- Phone number input-->
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="name" name="name" type="text" placeholder="이름" data-sb-validations="required" />
-                                        <label for="name">이름</label>
+                                    <form:input path="name" id="name" cssClass="form-control"/>
+                                       
+                                        <form:label path="name">이름</form:label>
+                                        <form:errors path="name" cssStyle="color:tomato"/>
                                         <div class="invalid-feedback" data-sb-feedback="name:required">A phone number is required.</div>
                                     </div>
                                     <!-- Email address input-->
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="email" name="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
-                                        <label for="email">이메일</label>
-                                        <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                                        <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                                       <form:input id="email" path="email" cssClass="form-control"/>
+                                        <form:label path="email">이메일</form:label>
+                                        <form:errors path="email" cssStyle="color:tomato"/>
                                     </div>
                                     <!-- Birth input-->
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="birth" type="date" name="birth" data-sb-validations="required" />
-                                        <label for="birth">생년월일</label>
-                                        <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                                        <form:input cssClass="form-control" id="birth" type="date" path="birth" />
+                                        <form:label path="birth">생년월일</form:label>
+                                        <form:errors path="birth" cssStyle="color:tomato"/>
                                     </div>
                                    
                                     <!-- Submit Button-->
                                     <div class="d-grid"><button class="btn btn-primary btn-lg " id="submitButton" type="submit">Submit</button></div>
-                                </form>
+                               </form:form>
+                               
                             </div>
                         </div>
                     </div>
@@ -79,6 +88,6 @@
 <!-- footer 적용해야함 --> 
 <c:import url ="../temp/footer.jsp"></c:import>
 <!-- footer 적용 끝 -->
-<script src="/js/joinFormCheck.js"></script>
+<!-- <script src="/js/joinFormCheck.js"></script> -->
 </body>
 </html>
