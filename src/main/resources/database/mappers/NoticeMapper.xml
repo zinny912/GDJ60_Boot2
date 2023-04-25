@@ -40,6 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		NOTICEFILES NF 
 		ON (N.NUM = NF.NUM) 
 		WHERE N.NUM=#{num}
+		ORDER BY NUM ASC
 		
 	</select>
 	<resultMap type="NoticeVO" id="getDetailResult">
