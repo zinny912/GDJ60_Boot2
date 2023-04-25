@@ -81,7 +81,7 @@ public class QnaService implements BoardService{
 	}
 
 	@Override
-	public int setDelete(BoardVO boardVO) throws Exception {
+	public int setDelete(BoardVO boardVO, Long fileNum) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
 	}
