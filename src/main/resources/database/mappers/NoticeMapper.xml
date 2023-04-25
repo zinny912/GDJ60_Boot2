@@ -66,6 +66,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		DELETE FROM NOTICE WHERE NUM=#{num}
 	</delete>
 	
+	<delete id="setFileDelete" parameterType="Long">
+		DELETE FROM NOTICEFILES WHERE FILENUM = #{fileNum}
+	</delete>
+	
 	<select id="getTotalCount" parameterType="Pager" resultType="Long">
 		SELECT COUNT(NUM) FROM NOTICE
 		<include refid="search"></include>

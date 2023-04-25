@@ -102,4 +102,24 @@ public class NoticeController {
 		
 		return mv;
 	}
+	
+	@PostMapping("delete")
+	public ModelAndView setDelete(BoardVO boardVO, Long fileNum)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		int result = noticeService.setDelete(boardVO, fileNum);
+		log.warn("delete=========> {}", result);
+		
+//		String message="삭제실패";
+//		if(result>0) {
+//			message = "글이 삭제 되었습니다.";
+//		}
+//		log.warn(message);
+//		
+//		mv.addObject("result", message);
+		mv.setViewName("redirect:./list");
+//		mv.setViewName("common/result");
+		
+		return mv;
+	}
 }

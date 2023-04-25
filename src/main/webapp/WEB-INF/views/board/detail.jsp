@@ -54,6 +54,9 @@
                                     	<p>파일다운로드 : <a href="./fileDown?fileNum=${boardFileVO.fileNum}">${boardFileVO.oriName}</a></p>
                                     	
                                    	</c:forEach>
+                                   <form action="./delete" method="post" id="frm"> 	
+                                   	 <div class="d-grid"><button class="btn btn-danger col-2" id="submitButton" type="submit">삭제</button></div>
+                                	</form>
                                 </section>
                             </article>
                             

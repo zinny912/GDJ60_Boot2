@@ -93,11 +93,14 @@ public class NoticeService implements BoardService {
 	}
 
 	@Override
-	public int setDelete(BoardVO boardVO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+	public int setDelete(BoardVO boardVO, Long fileNum) throws Exception {
+		int result=0;
+		if(fileNum !=null) {
+			result = noticeDAO.setFileDelete(fileNum);
+		}
+		result = noticeDAO.setDelete(boardVO);
+		
+		return result;
 	}
-	
-	
 	
 }
