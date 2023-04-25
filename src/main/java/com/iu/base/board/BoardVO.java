@@ -22,9 +22,7 @@ public class BoardVO {
 	private String writer;
 	private Date wdate;
 	private Long click; 
-	private SubVO subVO;
-	//private String [] names;
-	private List<String> names;
+	
 	
 	private List<BoardFileVO> boardFileVOs;
 

@@ -54,40 +54,7 @@
                                         <form:errors path="writer" cssStyle="color:tomato"></form:errors>
                                         
                                     </div>
-                                    <div class="form-floating mb-3">
-                                       <!--  <input class="form-control" id="writer" type="text" name="writer" data-sb-validations="required" /> -->
-                                        <form:input path="subVO.subName" id="writer" cssClass="form-control"/>
-                                        <label for="subName">subName</label>
-                                       <%--  <form:errors path="writer" cssStyle="color:tomato"></form:errors> --%>
-                                        
-                                    </div>
                                     
-                                     <div class="form-floating mb-3">
-                                       <!--  <input class="form-control" id="writer" type="text" name="writer" data-sb-validations="required" /> -->
-                                        <form:input path="names" id="writer" cssClass="form-control"/>
-                                        <label for="names">Names</label>
-                                       <%--  <form:errors path="writer" cssStyle="color:tomato"></form:errors> --%>
-                                        
-                                    </div>
-                                     <div class="form-floating mb-3">
-                                       <!--  <input class="form-control" id="writer" type="text" name="writer" data-sb-validations="required" /> -->
-                                        <form:input path="boardFileVOs[1].fileName" id="writer" cssClass="form-control"/>
-                                        <label for="writer">BoardFileName</label>
-                                       <%--  <form:errors path="writer" cssStyle="color:tomato"></form:errors> --%>
-                                        
-                                    </div>
-                                   
-                                   <div class="form-floating mb-3">
-                                       <!--  <input class="form-control" id="writer" type="text" name="writer" data-sb-validations="required" /> -->
-                                        <form:input path="boardFileVOs[2].fileName" id="writer" cssClass="form-control"/>
-                                        <label for="writer">BoardFileName</label>
-                                       <%--  <form:errors path="writer" cssStyle="color:tomato"></form:errors> --%>
-                                        
-                                    </div>
-                                   
-                                   
-                                   
-                                 
                                      <!-- Contents input-->
                                      <div class="form-floating mb-3">
                                         <textarea class="form-control" id="contents" type="text" name="contents" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
