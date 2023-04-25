@@ -32,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		LEFT OUTER JOIN
 		QNAFILES QF
 		ON (Q.NUM = QF.NUM)
-		WEHER QF.NUM=#{num}
+		WEHER Q.NUM=#{num}
 	
 	</select>
 	<resultMap type="QnaVO" id="getDetailResult">

@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		LEFT OUTER JOIN  
 		NOTICEFILES NF 
 		ON (N.NUM = NF.NUM) 
-		WHERE NF.NUM=#{num}
+		WHERE N.NUM=#{num}
 		
 	</select>
 	<resultMap type="NoticeVO" id="getDetailResult">
