@@ -91,16 +91,23 @@ public class NoticeService implements BoardService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
 	@Override
 	public int setDelete(BoardVO boardVO, Long fileNum) throws Exception {
-		int result=0;
-		if(fileNum !=null) {
+		Long num = boardVO.getNum();
+		int result = noticeDAO.setDelete(boardVO);
+		
+		if(result>0) {
 			result = noticeDAO.setFileDelete(fileNum);
-		}
-		result = noticeDAO.setDelete(boardVO);
+		} 
+		
 		
 		return result;
+	}
+	@Override
+	public int setDelete(BoardVO boardVO) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 }

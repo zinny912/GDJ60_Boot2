@@ -86,6 +86,17 @@ public class NoticeController {
 
 	@PostMapping("add")
 	public ModelAndView setInsert(@Valid BoardVO boardVO, BindingResult bindingResult, MultipartFile[] boardFiles) throws Exception{
+		log.error("======={}======", boardVO.getSubVO().getSubName());
+		
+		for(String n: boardVO.getNames()) {
+			log.error("======={}======", n);
+				
+		}
+		
+		for(BoardFileVO boardFileVO:boardVO.getBoardFileVOs()) {
+			log.error("======={}======", boardFileVO.getFileName());
+		}
+		
 		ModelAndView mv = new ModelAndView();
 		if(bindingResult.hasErrors()) {
 			log.warn("============ 검증에 실패 ===========");
@@ -104,21 +115,22 @@ public class NoticeController {
 	}
 	
 	@PostMapping("delete")
-	public ModelAndView setDelete(BoardVO boardVO, Long fileNum)throws Exception{
+	public ModelAndView setDelete(BoardVO boardVO)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		int result = noticeService.setDelete(boardVO, fileNum);
+		int result = noticeService.setDelete(boardVO);
 		log.warn("delete=========> {}", result);
 		
-//		String message="삭제실패";
-//		if(result>0) {
-//			message = "글이 삭제 되었습니다.";
-//		}
-//		log.warn(message);
-//		
-//		mv.addObject("result", message);
-		mv.setViewName("redirect:./list");
-//		mv.setViewName("common/result");
+		String message="삭제실패";
+		if(result>0) {
+			message = "글이 삭제 되었습니다.";
+		}
+		log.warn(message);
+		
+		mv.addObject("result", message);
+		mv.addObject("url","./list");
+//		mv.setViewName("redirect:./list");
+		mv.setViewName("common/result");
 		
 		return mv;
 	}

@@ -9,6 +9,7 @@
         <title>Modern Business - Start Bootstrap Template</title>
        <!-- css & favicon  -->
        <c:import url="../temp/style.jsp"></c:import>
+       
        <!-- css & favicon  -->
     </head>
     
@@ -47,14 +48,18 @@
                                 
                                 <!-- Post content-->
                                 <section class="mb-5">
+                      
                                     <p class="fs-5 mb-4">${boardVO.contents}</p>
                                     <c:forEach items="${boardVO.boardFileVOs}" var="boardFileVO">
                                     	<img class="img-fluid rounded" alt="" src="/file/${board}/${boardFileVO.fileName}">
+                                    	<input type="hidden" name="fileNum" value="${boardFileVO.fileNum}">
                                     	<br>
                                     	<p>파일다운로드 : <a href="./fileDown?fileNum=${boardFileVO.fileNum}">${boardFileVO.oriName}</a></p>
                                     	
                                    	</c:forEach>
                                    <form action="./delete" method="post" id="frm"> 	
+                                  	 <input type="hidden" name="num" value="${boardVO.num}">
+                                  	 
                                    	 <div class="d-grid"><button class="btn btn-danger col-2" id="submitButton" type="submit">삭제</button></div>
                                 	</form>
                                 </section>

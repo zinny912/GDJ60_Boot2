@@ -21,7 +21,10 @@ public class BoardVO {
 	@NotBlank(message="작성자는 필수라우")
 	private String writer;
 	private Date wdate;
-	private Long click;
+	private Long click; 
+	private SubVO subVO;
+	//private String [] names;
+	private List<String> names;
 	
 	private List<BoardFileVO> boardFileVOs;
 
