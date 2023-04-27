@@ -1,5 +1,7 @@
 package com.iu.base.member;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +64,9 @@ public class MemberController {
 	@GetMapping("logout")
 	public ModelAndView getLogout(HttpSession session) throws Exception {
 		ModelAndView mv= new ModelAndView();
+		
+		MemberVO memberVO =(MemberVO)session.getAttribute("member");
+		int result=memberService.setLastTime(memberVO);
 		
 		session.invalidate();
 		

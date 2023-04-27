@@ -33,6 +33,7 @@ public class MemberVO {
 	@Past
 	private Date birth;
 	private boolean enabled;
+	//private Date lsatTime;
 	
 	private List<RoleVO> roleVOs;
 

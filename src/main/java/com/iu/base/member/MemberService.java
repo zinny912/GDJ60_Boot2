@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
@@ -53,6 +54,7 @@ public class MemberService {
 		return result;
 	}
 	
+	//아이디 중복체크 
 	public MemberVO idDuplicateCheck (MemberVO memberVO) throws Exception {
 		return memberDAO.idDuplicateCheck(memberVO);
 	}
@@ -72,5 +74,14 @@ public class MemberService {
 //		 }
 	return memberDAO.getLogin(memberVO);
 	}
-
+	
+	//로그아웃하면 로그아웃한 시간 기록되는 서비스
+	public int setLastTime(MemberVO memberVO) throws Exception {
+		
+		return memberDAO.setLastTime(memberVO);
+	}
+	
+	
+	
+	
 }

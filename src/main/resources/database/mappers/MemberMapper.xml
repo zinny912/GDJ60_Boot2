@@ -37,7 +37,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT USERNAME FROM MEMBER WHERE USERNAME=#{userName} 
 	</select>
 	
+	<select id="getMemberList" resultType="MemberVO">
+		SELECT USERNAME FROM MEMBER 
+	</select>
 	
+	<update id="setLastTime" parameterType="MemberVO">
+		UPDATE MEMBER SET LASTTIME=now() WHERE USERNAME=#{userName}
+	</update>
 	
+	<update id="setEnabledMember">
+	<![CDATA[
+		UPDATE MEMBER SET ENABLED = 0 WHERE LASTTIME <= now()-INTERVAL 3 DAY
+		]]>
+	</update>
+	
+	<!-- 회원 생일 가져와서 생일인 사람 이름을 공지사항 게시글에 작성해주고, 이메일로 전송해주는 쿼리  -->
+	<select id="getMemberBirthday" resultType="MemberVO">
+		SELECT NAME, EMAIL FROM MEMBER WHERE DAYOFYEAR(BIRTH)=DAYOFYEAR(NOW())
+	</select>
 	
 </mapper>
