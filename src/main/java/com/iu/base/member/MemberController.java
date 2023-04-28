@@ -3,12 +3,16 @@ package com.iu.base.member;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.catalina.authenticator.SpnegoAuthenticator.AuthenticateAction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,6 +32,29 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	@GetMapping("info")
+	public void info(HttpSession session) {
+		log.error("============Login Info===========");
+		
+		
+//	SPRING_SECURITY_CONTEXT
+//		
+//	Enumeration<String> names =session.getAttributeNames();
+//	while(names.hasMoreElements()) {
+//		log.error("========================================>>>>>>>>>>>>>>>>>>>>>>>>>> {}", names.nextElement());
+//	}
+		Object obj=session.getAttribute("SPRING_SECURITY_CONTEXT");
+		log.error("========================================>>>>>>>>>>>>>>>>>>>>>>>>>> {}", obj);
+		SecurityContextImpl contextImpl = (SecurityContextImpl)obj;
+		Authentication authentication= contextImpl.getAuthentication();
+		
+		log.error("========================================>>>>>>>>>>>>>>>>>>>>>>>>>> {}", obj);
+		log.error("=======================================NAME >>>> {}", authentication.getName());
+		log.error("=======================================DETAIL >>>> {}", authentication.getDetails());
+		log.error("=======================================PRINCIPAL >>>> {}", authentication.getPrincipal());
+		
+	}
+	
 	@GetMapping("admin")
 	public void getAdmin () throws Exception {
 		
@@ -39,27 +66,34 @@ public class MemberController {
 	}
 	
 	@GetMapping("login")
-	public ModelAndView getLogin() throws Exception {
+	public ModelAndView getLogin(HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("member/login");
+		
+		Object obj=session.getAttribute("SPRING_SECURITY_CONTEXT");
+		
+		if(obj ==null) {
+			mv.setViewName("member/login");			
+		}else {
+			mv.setViewName("redirect:/");
+		}
 		
 		return mv;
 	}
 	
-	@PostMapping("login")
-	public ModelAndView getLogin(MemberVO memberVO, ModelAndView mv, HttpSession session) throws Exception {
-		
-		memberVO = memberService.getLogin(memberVO);
-		
-		mv.setViewName("redirect:./login");
-		
-		if(memberVO != null) {
-			session.setAttribute("member", memberVO);
-			mv.setViewName("redirect:../");
-		}
-
-		return mv;
-	}
+//	@PostMapping("login")
+//	public ModelAndView getLogin(MemberVO memberVO, ModelAndView mv, HttpSession session) throws Exception {
+//		
+//		memberVO = memberService.getLogin(memberVO);
+//		
+//		mv.setViewName("redirect:./login");
+//		
+//		if(memberVO != null) {
+//			session.setAttribute("member", memberVO);
+//			mv.setViewName("redirect:../");
+//		}
+//
+//		return mv;
+//	}
 	
 	@GetMapping("logout")
 	public ModelAndView getLogout(HttpSession session) throws Exception {
@@ -109,7 +143,7 @@ public class MemberController {
 	
 	@PostMapping("join")
 	public ModelAndView setJoin(@Valid MemberVO memberVO, BindingResult bindingResult) throws Exception {
-		memberVO.setEnabled(true);
+		//memberVO.setEnabled(true);
 		ModelAndView mv = new ModelAndView();
 		
 		boolean check=memberService.memberCheck(memberVO, bindingResult);
@@ -124,6 +158,32 @@ public class MemberController {
 		mv.addObject("member", result);
 		return mv;
 		
+	}
+	
+	@GetMapping("findPassword")
+	public ModelAndView setNewPassword() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("member/findPassword");
+		return mv;
+	}
+	
+	@PostMapping("findPassword")
+	public ModelAndView setNewPassword(MemberVO memberVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		int result = memberService.setNewPassword(memberVO);
+		log.error("정답은???{}",result);
+		
+		if(result == 0) {
+//			mailService.sendMail(memberVO);
+			mv.setViewName("common/result");
+			mv.addObject("message", "사용자가 없습니다.");
+		}else {
+			mv.setViewName("common/result");
+			mv.addObject("message", "메일이 발송되었습니다.");
+			mv.addObject("url", "./login");
+		}
+		return mv;
 	}
 	
 	

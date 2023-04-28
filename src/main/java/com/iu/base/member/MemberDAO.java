@@ -24,4 +24,6 @@ public interface MemberDAO {
 	
 	public List<MemberVO> getMemberBirthday() throws Exception;
 	
+	public int setNewPassword(MemberVO memberVO) throws Exception;
+	
 }

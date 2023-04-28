@@ -45,7 +45,7 @@ public class TestSchedule {
 				memberDAO.setEnabledMember();
 	}
 	
-	@Scheduled(cron ="*/5 * * * * *")
+	//@Scheduled(cron ="*/5 * * * * *")
 	public void getMemberBirthday()throws Exception {
 		
 		
@@ -93,7 +93,7 @@ public class TestSchedule {
 			};				
 				
 	}	
-	@Scheduled(cron="*/5 * * * * *")
+	//@Scheduled(cron="*/5 * * * * *")
 	public void sendMail()throws Exception {
 		List<MemberVO> ar = memberDAO.getMemberBirthday();
 		

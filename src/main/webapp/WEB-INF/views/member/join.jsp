@@ -33,10 +33,10 @@
                                 <form:form id="contactForm" modelAttribute="memberVO" method="post">
                                     <!-- Name input-->
                                     <div class="form-floating mb-3">
-                                        <form:input path="userName" id="userName" cssClass="form-control"/>
+                                        <form:input path="username" id="username" cssClass="form-control"/>
                      
-                                        <form:label path="userName">아이디</form:label>
-                                        <form:errors path="userName" cssStyle="color:tomato"/>
+                                        <form:label path="username">아이디</form:label>
+                                        <form:errors path="username" cssStyle="color:tomato"/>
                                        	<div class="idReCheck"></div>
                                     </div>
                                      <!-- password input-->

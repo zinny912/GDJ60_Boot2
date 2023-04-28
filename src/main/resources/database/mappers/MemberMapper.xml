@@ -5,16 +5,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.iu.base.member.MemberDAO">
 	<select id="getLogin" parameterType="MemberVO" resultMap ="getLoginResult">
-		SELECT M.USERNAME, M.NAME, M.EMAIL, R.NUM, R.ROLENAME 
+		SELECT M.USERNAME, M.NAME, M.EMAIL, M.PASSWORD, R.NUM, R.ROLENAME 
 		FROM MEMBER M
-		INNER JOIN MEMBER_ROLE MR
-		ON (M.USERNAME = MR.USERNAME)
-		INNER JOIN ROLE R
-		ON (MR.NUM = R.NUM)
-		WHERE M.USERNAME=#{userName} AND M.PASSWORD=#{password}
+			INNER JOIN MEMBER_ROLE MR
+			ON M.USERNAME = MR.USERNAME
+			INNER JOIN ROLE R
+			ON MR.NUM = R.NUM
+		WHERE M.USERNAME=#{username} 
 	</select>
 	<resultMap type="MemberVO" id="getLoginResult">
-	<id column="USERNAME" property="userName"/>
+	<id column="USERNAME" property="username"/>
+	<result column="PASSWORD" property="password"/>
 	<result column="NAME" property="name"/>
 	<result column="EMAIL" property="email"/>
 		<collection property="roleVOs" javaType="List" ofType="RoleVO" >
@@ -25,16 +26,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<insert id="setJoin" parameterType="memberVO">
 		INSERT INTO MEMBER (USERNAME, PASSWORD, NAME, EMAIL, BIRTH, ENABLED)
-		VALUES (#{userName}, #{password}, #{name}, #{email}, #{birth}, #{enabled})
+		VALUES (#{username}, #{password}, #{name}, #{email}, #{birth}, 1)
 	</insert>
 
 	<insert id = "setMemberRole" parameterType="Map">
 		INSERT INTO MEMBER_ROLE (USERNAME, NUM)
-		VALUES (#{userName},#{num})	
+		VALUES (#{username},#{num})	
 	</insert>
 
 	<select id="idDuplicateCheck" resultType="MemberVO" parameterType="MemberVO">
-		SELECT USERNAME FROM MEMBER WHERE USERNAME=#{userName} 
+		SELECT USERNAME FROM MEMBER WHERE USERNAME=#{username} 
 	</select>
 	
 	<select id="getMemberList" resultType="MemberVO">
@@ -42,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<update id="setLastTime" parameterType="MemberVO">
-		UPDATE MEMBER SET LASTTIME=now() WHERE USERNAME=#{userName}
+		UPDATE MEMBER SET LASTTIME=now() WHERE USERNAME=#{username}
 	</update>
 	
 	<update id="setEnabledMember">
@@ -55,5 +56,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getMemberBirthday" resultType="MemberVO">
 		SELECT NAME, EMAIL FROM MEMBER WHERE DAYOFYEAR(BIRTH)=DAYOFYEAR(NOW())
 	</select>
+	
+	<update id="setNewPassword" parameterType="MemberVO">
+		UPDATE MEMBER SET PASSWORD=#{password} WHERE USERNAME=#{username} AND EMAIL=#{email}
+	</update>
 	
 </mapper>

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
  <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+ <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -19,21 +20,21 @@
             <!-- Navigation-->
      <c:import url="./temp/header.jsp"></c:import>
             <!-- Header-->
-            <header class="bg-dark py-5">
+            <header class="bg-light py-5">
                 <div class="container px-5">
                     <div class="row gx-5 align-items-center justify-content-center">
                         <div class="col-lg-8 col-xl-7 col-xxl-6">
                             <div class="my-5 text-center text-xl-start">
-                                <h1 class="display-5 fw-bolder text-white mb-2">A Bootstrap 5 template for modern businesses</h1>
-                                <p class="lead fw-normal text-white-50 mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit!</p>
+                                <h1 class="display-5 fw-bolder text-dark mb-2">"돈 받으면 프로다"</h1>
+                                <p class="lead fw-normal text-dark-50 text-center mb-4">최강야구 개꿀잼</p>
                                 <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                                    <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features">Get Started</a>
-                                    <a class="btn btn-outline-light btn-lg px-4" href="#!">Learn More</a>
+                                    <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features">최강야구 보러가기</a>
+                                    <a class="btn btn-outline-dark btn-lg px-4" href="#!">더 알아보기</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="https://dummyimage.com/600x400/343a40/6c757d" alt="..." /></div>
-                    </div>
+                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="../images/monsters.png"/></div>
+                    </div> 
                 </div>
             </header>
             <!-- Features section-->
@@ -47,17 +48,21 @@
                         <h1> 
                      <%--    <c:if test="${not empty member }">
                         </c:if> --%>
-                        	<spring:message code="loginSuccess" text="없는 message" arguments="${member.userName},${member.name}" argumentSeparator=","></spring:message>
+                        	<spring:message code="loginSuccess" text="없는 message" arguments="${member.username},${member.name}" argumentSeparator=","></spring:message>
+                        	 <sec:authorize access="!isAuthenticated()">로그인 하세요</sec:authorize>
+                        	  <sec:authorize access="isAuthenticated()">로그인 성공</sec:authorize>
                         </h1>
                        
-                        <h2 class="fw-bolder mb-0">A better way to start building.</h2>
+                        <h2 class="fw-bolder mb-0">**랜더스도 이기자~~**</h2>
                        
                         </div>
                       
                         <div class="col-lg-8">
                             <div class="row gx-5 row-cols-1 row-cols-md-2">
                                 <div class="col mb-5 h-100">
-                                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-collection"></i></div>
+                               
+                               
+                                   <!--  <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-collection"></i></div>
                                     <h2 class="h5">Featured title</h2>
                                     <p class="mb-0">Paragraph of text beneath the heading to explain the heading. Here is just a bit more text.</p>
                                 </div>
@@ -75,7 +80,7 @@
                                     <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-toggles2"></i></div>
                                     <h2 class="h5">Featured title</h2>
                                     <p class="mb-0">Paragraph of text beneath the heading to explain the heading. Here is just a bit more text.</p>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -67,7 +68,9 @@ a {
                     </div>
                     </div>
                     <div class="container" style="margin-left:10%;">
+                    <sec:authorize access="hasRole('ADMIN')">
                     <a href="./add" class="btn" style="color:tomato;">글쓰기</a>
+                    </sec:authorize>
                     </div>
                     <div class="container-fluid" >
                     <table class="table" style="width:80%; margin:auto">

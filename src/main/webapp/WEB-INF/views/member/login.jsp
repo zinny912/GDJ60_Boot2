@@ -19,7 +19,7 @@
 		.blueResult{
 			color: blue;
 		}
-		.btnKakao{display:inline-block!important;margin-top:25px;padding-left:20px;width:100%;height:45px;line-height:45px;background-color:#fee500;background-image:url('/resources/images/kakao_btn.svg');background-repeat:no-repeat;background-size:15px;background-position:15px;border-radius:6px;font-size:15px;color:#111;box-sizing:border-box}
+		
 		
 		
 	a {	
@@ -59,37 +59,42 @@
 
 
 
-<div class="container-fluid">
-<div class="row d-flex justify-content-center">
-<div class="col-6" style="margin-top: 5%;">
-
-<form class="col-6 mx-auto my-5 justify-content-center" id="loginForm" action="./login" method="post">
-<a href="/"><h4>스타트 스프링부트</h4></a>
-<br><h3 class="col-6 text-center mx-auto" style="padding-bottom:10%;">로그인</h3>
-  <div class="d-flex flex-row align-items-center mb-4">
-    <div class="form-outline flex-fill mb-0">
-      <input type="text" id="userName" name="userName" class="form-control" placeholder="아이디"/>
-           <label class="form-label" id="idLabel" for="id"></label>
-      <input type="password" id="password" name="password" class="form-control" placeholder="비밀번호"/>
-      <label class="form-label" for="Password" id="passwordLabel"></label>
-    </div>
-  </div>
-
-  <div class="d-flex flex-row align-items-center mb-4">
-    <button type="submit" id="submitBtnLogin" class="btn btn-dark col-12">로그인</button>
-  </div>
-
-  <div class="d-flex flex-row align-items-center mb-4">
-    <a id="submitBtnJoin" class="btn btn-secondary col-12" href="./join">회원가입</a>
-  </div>                 
-
-</form>
-
-
-
-</div>
-</div></div>
- 
+				<div class="container-fluid">
+				<div class="row d-flex justify-content-center">
+				<div class="col-6" style="margin-top: 5%;">
+				
+				<form class="col-6 mx-auto my-5 justify-content-center" id="loginForm" action="./login" method="post">
+				<a href="/"><h4>최강야구 팬페이지</h4></a>
+				<br><h3 class="col-6 text-center mx-auto" style="padding-bottom:10%;">로그인</h3>
+				  <div class="d-flex flex-row align-items-center mb-4">
+				    <div class="form-outline flex-fill mb-0">
+				      <input type="text" id="username" value="${cookie.remember.value}" name="username" class="form-control" placeholder="아이디"/>
+				           <label class="form-label" id="idLabel" for="id"></label>
+				      <input type="password" id="password" name="password" class="form-control" placeholder="비밀번호"/>
+				      <label class="form-label" for="Password" id="passwordLabel"></label>
+				      
+				      <input type="checkbox" id="remeber" value="remember" name="remember"/>
+				      <label class="form-label" for="remember">아이디 기억하기</label>
+				    </div>
+				  </div>
+				
+				  <div class="d-flex flex-row align-items-center mb-4">
+				    <button type="submit" id="submitBtnLogin" class="btn btn-dark col-12">로그인</button>
+				  </div>
+				
+				  <div class="d-flex flex-row align-items-center mb-4">
+				    <a id="submitBtnJoin" class="btn btn-secondary col-12" href="./join">회원가입</a>
+				  </div>                 
+				
+				</form>
+				
+				<div class="d-flex flex-row align-items-center mb-4">
+				<a class="btn btn-danger col-6 mx-auto" href="./findPassword">비밀번호 찾기</a>
+				</div>
+				
+				</div>
+				</div></div>
+				 
  
  
  
