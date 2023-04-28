@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.iu.base.member.MemberDAO">
 	<select id="getLogin" parameterType="MemberVO" resultMap ="getLoginResult">
-		SELECT M.USERNAME, M.NAME, M.EMAIL, M.PASSWORD, R.NUM, R.ROLENAME 
+		SELECT M.USERNAME, M.NAME, M.EMAIL, M.PASSWORD, M.ENABLED, R.NUM, R.ROLENAME 
 		FROM MEMBER M
 			INNER JOIN MEMBER_ROLE MR
 			ON M.USERNAME = MR.USERNAME
@@ -16,6 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap type="MemberVO" id="getLoginResult">
 	<id column="USERNAME" property="username"/>
 	<result column="PASSWORD" property="password"/>
+	<result column="ENABLED" property="enabled"/>
 	<result column="NAME" property="name"/>
 	<result column="EMAIL" property="email"/>
 		<collection property="roleVOs" javaType="List" ofType="RoleVO" >

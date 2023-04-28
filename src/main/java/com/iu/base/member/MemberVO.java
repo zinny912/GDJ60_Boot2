@@ -39,6 +39,8 @@ public class MemberVO implements UserDetails {
 	@Past
 	private Date birth;
 	
+	private boolean enabled;
+	
 	//private Date lsatTime;
 	
 	private List<RoleVO> roleVOs;
@@ -102,7 +104,7 @@ public class MemberVO implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
-		return true;
+		return this.enabled;
 	}
 	
 	

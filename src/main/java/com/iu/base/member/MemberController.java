@@ -13,6 +13,7 @@ import org.apache.catalina.authenticator.SpnegoAuthenticator.AuthenticateAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextImpl;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,9 +32,24 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	
 	@GetMapping("info")
 	public void info(HttpSession session) {
+		
+		String pw = "111111";
+		
+		MemberVO memberVO = (MemberVO)memberService.loadUserByUsername("user");
+		
+		log.error("{} ::::::::", memberVO.getPassword());
+		log.error("{} ::::::::", passwordEncoder.encode(pw));
+		log.error("{}::::::::", memberVO.getPassword().equals(passwordEncoder.encode(pw)));
+		
+		boolean check = passwordEncoder.matches(pw, memberVO.getPassword());
+		log.error("{} ::::::::", check);
+		
 		log.error("============Login Info===========");
 		
 		
@@ -43,16 +59,16 @@ public class MemberController {
 //	while(names.hasMoreElements()) {
 //		log.error("========================================>>>>>>>>>>>>>>>>>>>>>>>>>> {}", names.nextElement());
 //	}
-		Object obj=session.getAttribute("SPRING_SECURITY_CONTEXT");
-		log.error("========================================>>>>>>>>>>>>>>>>>>>>>>>>>> {}", obj);
-		SecurityContextImpl contextImpl = (SecurityContextImpl)obj;
-		Authentication authentication= contextImpl.getAuthentication();
-		
-		log.error("========================================>>>>>>>>>>>>>>>>>>>>>>>>>> {}", obj);
-		log.error("=======================================NAME >>>> {}", authentication.getName());
-		log.error("=======================================DETAIL >>>> {}", authentication.getDetails());
-		log.error("=======================================PRINCIPAL >>>> {}", authentication.getPrincipal());
-		
+//		Object obj=session.getAttribute("SPRING_SECURITY_CONTEXT");
+//		log.error("========================================>>>>>>>>>>>>>>>>>>>>>>>>>> {}", obj);
+//		SecurityContextImpl contextImpl = (SecurityContextImpl)obj;
+//		Authentication authentication= contextImpl.getAuthentication();
+//		
+//		log.error("========================================>>>>>>>>>>>>>>>>>>>>>>>>>> {}", obj);
+//		log.error("=======================================NAME >>>> {}", authentication.getName());
+//		log.error("=======================================DETAIL >>>> {}", authentication.getDetails());
+//		log.error("=======================================PRINCIPAL >>>> {}", authentication.getPrincipal());
+//		
 	}
 	
 	@GetMapping("admin")

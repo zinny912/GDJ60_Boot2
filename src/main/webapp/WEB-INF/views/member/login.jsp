@@ -63,6 +63,9 @@
 				<div class="row d-flex justify-content-center">
 				<div class="col-6" style="margin-top: 5%;">
 				
+				<c:if test="${not empty param.errorMessage}">
+					<h1 style="color:tomato"> ${param.errorMessage}</h1>
+				</c:if>
 				<form class="col-6 mx-auto my-5 justify-content-center" id="loginForm" action="./login" method="post">
 				<a href="/"><h4>최강야구 팬페이지</h4></a>
 				<br><h3 class="col-6 text-center mx-auto" style="padding-bottom:10%;">로그인</h3>
@@ -102,7 +105,9 @@
 <!-- footer 적용해야함 --> 
 <c:import url ="../temp/footer.jsp"></c:import>
 <!-- footer 적용 끝 -->
-
+<script type="text/javascript">
+history.replaceState({}, null, location.pathname)
+</script>
 
 </body>
 </html>

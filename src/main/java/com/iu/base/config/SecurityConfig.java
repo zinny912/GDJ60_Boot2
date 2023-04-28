@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
+import com.iu.base.security.UserLoginFailHandler;
 import com.iu.base.security.UserLogoutSuccessHandler;
 import com.iu.base.security.UserSuccessHandler;
 
@@ -57,9 +58,10 @@ public class SecurityConfig {
 			.formLogin()
 					.loginPage("/member/login")
 					//.defaultSuccessUrl("/")
-					//한번쓰고 버릴것들은 이렇게 객체생성해서 사용해도 된다 
+					//한번쓰고 버릴것들은 이렇게 객체생성해서 사용해도 된다 --> component어노테이션필요없음~
 					.successHandler(new UserSuccessHandler())
-					.failureUrl("/member/login")
+					//.failureUrl("/member/login")
+					.failureHandler(new UserLoginFailHandler())
 					.permitAll()
 					.and()
 			.logout()
