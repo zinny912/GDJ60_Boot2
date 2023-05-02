@@ -11,16 +11,23 @@ import javax.validation.Valid;
 
 import org.apache.catalina.authenticator.SpnegoAuthenticator.AuthenticateAction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +41,36 @@ public class MemberController {
 	private MemberService memberService;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	@Value("${spring.security.oauth2.client.registration.kakao.client-secret}")
+	private String adminKey;
+	
+	@GetMapping("delete")
+	public String delete() throws Exception{
+		MemberVO memberVO = (MemberVO)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		//회원가입 방식을 구분해서 탈퇴 시켜줘야함 --> 컬럼 추가해야해... -> 방식 구분하는거는 Service에서 진행해도 무관
+		this.kakaoDelete(memberVO);
+		
+		return "redirect:./logout";
+		
+	}
+	
+	private void kakaoDelete(MemberVO memberVO) {
+		RestTemplate restTemplate = new RestTemplate();
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization", "KakaoAK "+adminKey);
+		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+		
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+		params.add("target_id_type", "user_id");
+		params.add("target_id", memberVO.getAttribute().get("id").toString());
+		
+		HttpEntity<MultiValueMap<String, String>> req = new HttpEntity<>(params,headers);
+		
+		String id=restTemplate.postForObject("https://kapi.kakao.com/v1/user/unlink", req, String.class);
+		log.error("delete {} <-----------------",id);
+	}
+	
 	
 	
 	@GetMapping("info")
@@ -65,9 +102,9 @@ public class MemberController {
 //		Authentication authentication= contextImpl.getAuthentication();
 //		
 //		log.error("========================================>>>>>>>>>>>>>>>>>>>>>>>>>> {}", obj);
-//		log.error("=======================================NAME >>>> {}", authentication.getName());
+//		log.error("=======================================USERNAME >>>> {}", authentication.getName());
 //		log.error("=======================================DETAIL >>>> {}", authentication.getDetails());
-//		log.error("=======================================PRINCIPAL >>>> {}", authentication.getPrincipal());
+//		log.error("=======================================MemberVO PRINCIPAL >>>> {}", authentication.getPrincipal());
 //		
 	}
 	
@@ -111,18 +148,18 @@ public class MemberController {
 //		return mv;
 //	}
 	
-	@GetMapping("logout")
-	public ModelAndView getLogout(HttpSession session) throws Exception {
-		ModelAndView mv= new ModelAndView();
+//	@GetMapping("logout")
+//	public ModelAndView getLogout(HttpSession session) throws Exception {
+//		ModelAndView mv= new ModelAndView();
+//		
+//		MemberVO memberVO =(MemberVO)session.getAttribute("member");
+//		int result=memberService.setLastTime(memberVO);
+//		
+//		session.invalidate();
 		
-		MemberVO memberVO =(MemberVO)session.getAttribute("member");
-		int result=memberService.setLastTime(memberVO);
-		
-		session.invalidate();
-		
-		mv.setViewName("redirect:/");
-		return mv;
-	}
+//		mv.setViewName("redirect:/");
+//		return mv;
+//	}
 	
 	@GetMapping("idDuplicateCheck")
 	@ResponseBody

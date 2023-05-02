@@ -11,7 +11,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
+import com.iu.base.member.MemberSocialService;
 import com.iu.base.security.UserLoginFailHandler;
+import com.iu.base.security.UserLogoutHandler;
 import com.iu.base.security.UserLogoutSuccessHandler;
 import com.iu.base.security.UserSuccessHandler;
 
@@ -20,7 +22,11 @@ import com.iu.base.security.UserSuccessHandler;
 public class SecurityConfig {
 	
 	@Autowired
+	private UserLogoutHandler userLogoutHandler;
+	@Autowired
 	private LogoutSuccessHandler logoutSuccessHandler;
+	@Autowired
+	private MemberSocialService memberSocialService;
 	
 	@Bean
 	//public 을 선언하면 default로 바꾸라는 메세지 출력
@@ -39,6 +45,7 @@ public class SecurityConfig {
 	SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity
 				.cors()
+				//.disable()
 				.and()
 				.csrf()
 				.disable()
@@ -46,7 +53,7 @@ public class SecurityConfig {
 				//URL과 권한 매칭
 				.antMatchers("/").permitAll()
 				.antMatchers("/member/join").permitAll()
-				.antMatchers("/notice/add").hasRole("ADMIN")
+				.antMatchers("/notice/add").hasRole("MEMBER")
 				.antMatchers("/notice/update").hasRole("ADMIN")
 				.antMatchers("/notice/delete").hasRole("ADMIN")
 				.antMatchers("/notice/*").permitAll()
@@ -67,11 +74,19 @@ public class SecurityConfig {
 			.logout()
 					.logoutUrl("/member/logout")
 					//.logoutSuccessUrl("/")
+					//.addLogoutHandler(userLogoutHandler)
 					.logoutSuccessHandler(logoutSuccessHandler)
 					//.logoutSuccessHandler(new UserLogoutSuccessHandler())
 					.invalidateHttpSession(true)
 					.deleteCookies("JSESSIONID")
-					.permitAll();
+					.permitAll()
+					.and()
+			.oauth2Login() //Social Login 설정
+					.userInfoEndpoint()
+					.userService(memberSocialService)
+//				.sessionManagement()
+//					.maximumSessions(1) //최대 허용가능한 세션의 수, -1 : 무제한
+//					.maxSessionsPreventsLogin(false) //false : 이전 사용자의 세션을 만료시키는 , true:새로운 사용자를 못들어오게	
 				;
 		
 		return httpSecurity.build();

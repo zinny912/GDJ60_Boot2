@@ -46,7 +46,10 @@
   font-family: "Gowun Dodum",  sans-serif;
   font-weight: 100;
   font-size: 5px;
-}  
+  }
+
+		
+  
 
 </style>
 
@@ -63,10 +66,11 @@
 				<div class="row d-flex justify-content-center">
 				<div class="col-6" style="margin-top: 5%;">
 				
-				<c:if test="${not empty param.errorMessage}">
-					<h1 style="color:tomato"> ${param.errorMessage}</h1>
-				</c:if>
+				
+				
 				<form class="col-6 mx-auto my-5 justify-content-center" id="loginForm" action="./login" method="post">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+				
 				<a href="/"><h4>최강야구 팬페이지</h4></a>
 				<br><h3 class="col-6 text-center mx-auto" style="padding-bottom:10%;">로그인</h3>
 				  <div class="d-flex flex-row align-items-center mb-4">
@@ -75,7 +79,9 @@
 				           <label class="form-label" id="idLabel" for="id"></label>
 				      <input type="password" id="password" name="password" class="form-control" placeholder="비밀번호"/>
 				      <label class="form-label" for="Password" id="passwordLabel"></label>
-				      
+				      <c:if test="${not empty param.errorMessage}">
+					<p style="color:tomato"> ${param.errorMessage}</p>
+				      </c:if>
 				      <input type="checkbox" id="remeber" value="remember" name="remember"/>
 				      <label class="form-label" for="remember">아이디 기억하기</label>
 				    </div>
@@ -91,13 +97,22 @@
 				
 				</form>
 				
-				<div class="d-flex flex-row align-items-center mb-4">
+				<div class="d-flex flex-row align-items-center mb-2">
 				<a class="btn btn-danger col-6 mx-auto" href="./findPassword">비밀번호 찾기</a>
+				</div>
+				<div class="d-flex flex-row align-items-center mb-4">
+				<a class="btn col-6 mx-auto"  href="/oauth2/authorization/kakao" style="background-color:#fee500; color:#000000;">Kakao Login</a>
+				
+				<div style="box-sizieng:border-box; border-radius:10%; background-color:#FEE500; background-image:url(../images/kakaos.png)">
+				<a href="/oauth2/authorization/kakao" >
+				<!-- <img src="../images/kakaos.png"/> -->
+				</a>
+				</div>
 				</div>
 				
 				</div>
-				</div></div>
-				 
+				</div>
+				 </div>
  
  
  

@@ -92,32 +92,52 @@ public class NoticeService implements BoardService {
 		return 0;
 	}
 	
+	@Override
+	public int setDelete(BoardVO boardVO, Long fileNum) throws Exception {
+		
+		int result =0;
+		
+		 //파일이 있다면 삭제 
+		 
+		if(fileNum != null) {
+			result = noticeDAO.setFileDelete(fileNum);
+		}else {
+			
+			result=1;
+		}
+		// 파일 삭제에 성공한 경우, 게시글 삭제 	
+		if(result>0) {
+			result = noticeDAO.setDelete(boardVO);
+		} 
+	
+		
+		return result;
+	}
+	@Override
+	public int setDelete(BoardVO boardVO) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+//	@Override
+//	public int setDelete(BoardVO boardVO) throws Exception {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
+////	
+//	@Override
+//	public int setDelete(BoardVO boardVO) throws Exception {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
 //	@Override
 //	public int setDelete(BoardVO boardVO, Long fileNum) throws Exception {
-//		Long num = boardVO.getNum();
-//		int result = noticeDAO.setDelete(boardVO);
-//		
-//		if(result>0) {
-//			result = noticeDAO.setFileDelete(fileNum);
-//		} 
-//		
-//		
-//		return result;
+//		// TODO Auto-generated method stub
+//		return 0;
 //	}
 //	@Override
 //	public int setDelete(BoardVO boardVO) throws Exception {
 //		// TODO Auto-generated method stub
 //		return 0;
 //	}
-//	
-	@Override
-	public int setDelete(BoardVO boardVO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	@Override
-	public int setDelete(BoardVO boardVO, Long fileNum) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 }

@@ -50,7 +50,13 @@
                         </c:if> --%>
                         	<spring:message code="loginSuccess" text="없는 message" arguments="${member.username},${member.name}" argumentSeparator=","></spring:message>
                         	 <sec:authorize access="!isAuthenticated()">로그인 하세요</sec:authorize>
-                        	  <sec:authorize access="isAuthenticated()">로그인 성공</sec:authorize>
+                        	  <sec:authorize access="isAuthenticated()">로그인 성공 : 
+                        	  	 <sec:authentication property="name"/>
+                        	  
+                        	  </sec:authorize>
+                        	  
+                        	 
+                        	  
                         </h1>
                        
                         <h2 class="fw-bolder mb-0">**랜더스도 이기자~~**</h2>
