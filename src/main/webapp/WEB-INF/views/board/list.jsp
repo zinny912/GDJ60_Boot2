@@ -30,7 +30,7 @@ th {
 thead {
   font-weight: bold;
   color: #fff;
-  background: tomato;
+  background: #1C006E;
 }
   
  td, th {
@@ -45,7 +45,7 @@ thead {
 }
 
 a {
-  color: #tomato;
+  color: #F72D69;
 }
        
        
@@ -61,15 +61,15 @@ a {
              <section class="bg-light py-5">
                 <div class="container px-5 my-5">
                     <div class="text-center mb-5">
-                    <img src="../images/card.png">
-                        <h1 class="fw-bolder" style="text-transform:uppercase; color:tomato;"> ${board}</h1>
-                        <p class="lead fw-normal text-muted mb-0">GIVE ME THE MONEY!!</p>
+                    <img src="../images/baseballbat.png">
+                        <h1 class="fw-bolder" style="text-transform:uppercase; color:#F72D69;"> ${board}</h1>
+                        <p class="lead fw-normal text-muted mb-0" style="text-transform:uppercase;">최강야구 관련 </p>
 
                     </div>
                     </div>
                     <div class="container" style="margin-left:10%;">
                     <sec:authorize access="hasRole('ADMIN')">
-                    <a href="./add" class="btn" style="color:tomato;">글쓰기</a>
+                    <a href="./add" class="btn" style="color:#1C006E;">글쓰기</a>
                     </sec:authorize>
                     </div>
                     <div class="container-fluid" >
@@ -159,7 +159,7 @@ a {
 								<input type="text" name="search" class="form-control">
 								</div>
 							<div class="col-auto">
-								<button type="submit" class="btn mb-3" style="color:tomato;">검색</button>
+								<button type="submit" class="btn mb-3" style="color:#1C006E;">검색</button>
 								</div>
 								</div>
 							</form>
